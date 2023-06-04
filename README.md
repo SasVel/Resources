@@ -1,2 +1,3 @@
 # Resources
- A project filled with reusable resources for Godot 4
+A project with reusable components for Godot 4
+<hr/>
