@@ -8,6 +8,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var MAX_SPEED = 12.0
 @export var ACCELERATION = 0.6
 @export var FRICTION = 1
+@export_range(0.0, 1, 0.1) var rotation_speed = 0.2
+
 var lastDirection = Vector2.ZERO
 var CURR_SPEED = START_SPEED : set = set_curr_speed
 var rotationInDegrees = 0
@@ -63,7 +65,7 @@ func move_state(input_dir):
 		else:
 			rotationInDegrees = -90 * input_dir.x
 
-	mesh.rotation.y = lerp_angle(mesh.rotation.y, deg_to_rad(rotationInDegrees), 0.2)
+	mesh.rotation.y = lerp_angle(mesh.rotation.y, deg_to_rad(rotationInDegrees), rotation_speed)
 	
 	velocity.x = direction.x * CURR_SPEED
 	velocity.z = direction.z * CURR_SPEED * 2

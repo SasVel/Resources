@@ -1,17 +1,20 @@
 2a60927148abd1d33b818b535e306557
-::res://::1686835320
+::res://::1686836316
 README.md::TextFile::-1::1686835289::0::1::::<><>::
-::res://Font/::1686835289
+::res://Font/::1686835322
 PIXBOB LITE.ttf::FontFile::3430854167055879212::1686835289::1686835322::1::::<><>::
 ::res://Interaction Boxes/::1686835289
 HitBox.gd::GDScript::-1::1686835289::0::1::::<>Area2D<>::
 HitBox.tscn::PackedScene::6878274085874066567::1686835289::0::1::::<><>::res://Interaction Boxes/HitBox.gd
 HurtBox.tscn::PackedScene::1694705077963986403::1686835289::0::1::::<><>::
-::res://Scripts/::1686835289
+::res://Scripts/::1686835351
+::res://Scripts/3D/::1686835367
+PlayerMovement.gd::GDScript::-1::1686835367::0::1::::Player<>CharacterBody3D<>::
 ::res://Scripts/Text scripts/::1686835289
 BlinkingText.gd::GDScript::-1::1686835289::0::1::::<>Label<>::
 ColorBlinkingText.gd::GDScript::-1::1686835289::0::1::::<>Label<>::
-::res://Shaders/::1686835289
+::res://Shaders/::1686836255
+pixelart_stylizer.gdshader::Shader::-1::1686836255::0::1::::<><>::
 RetroTvShader.gdshader::Shader::-1::1686835289::0::1::::<><>::
 RetroTvShader.tscn::PackedScene::5072385443987906202::1686835289::0::1::::<><>::res://Shaders/RetroTvShader.gdshader
 VignetteShader.gdshader::Shader::-1::1686835289::0::1::::<><>::
