@@ -10,7 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var FRICTION = 1
 @export_range(0.0, 1, 0.1) var rotation_speed = 0.2
 
-var lastDirection = Vector2.ZERO
+var lastDirection = Vector3.ZERO
 var CURR_SPEED = START_SPEED : set = set_curr_speed
 var rotationInDegrees = 0
 
@@ -24,12 +24,18 @@ enum {
 }
 var state = IDLE
 
+var direction
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		
-	var input_dir = Input.get_vector("player_left", "player_right", "player_forward", "player_backward")
-	if input_dir == Vector2.ZERO:
+	
+	direction = Vector3(Input.get_action_strength("player_left") - Input.get_action_strength("player_right"), 
+						0, 
+						Input.get_action_strength("player_forward") - Input.get_action_strength("player_backward"))
+	
+	mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(lastDirection.x, lastDirection.z), rotation_speed)
+	
+	if direction == Vector3.ZERO:
 		state = IDLE
 	else:
 		state = MOVE
@@ -38,7 +44,7 @@ func _physics_process(delta):
 		IDLE:
 			idle_state()
 		MOVE:
-			move_state(input_dir)
+			move_state()
 		ATTACK:
 			attack_state()
 	
@@ -49,28 +55,15 @@ func idle_state():
 	velocity.x = move_toward(velocity.x, 0, FRICTION)
 	velocity.z = move_toward(velocity.z, 0, FRICTION * 2)
 	
-func move_state(input_dir):
-	#movement
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+func move_state():
 	CURR_SPEED += ACCELERATION
-	if lastDirection != input_dir:
+	if lastDirection != direction:
 		CURR_SPEED = START_SPEED
-		
-		if input_dir.y != 0:
-			if input_dir.y == 1:
-				rotationInDegrees = 180
-			else:
-				rotationInDegrees = 0
-		else:
-			rotationInDegrees = -90 * input_dir.x
 
-	mesh.rotation.y = lerp_angle(mesh.rotation.y, deg_to_rad(rotationInDegrees), rotation_speed)
-	
 	velocity.x = direction.x * CURR_SPEED
-	velocity.z = direction.z * CURR_SPEED * 2
+	velocity.z = direction.z * CURR_SPEED * 1.5
 	
-	lastDirection = input_dir
+	lastDirection = direction
 	
 func attack_state():
 	pass
